@@ -3,18 +3,20 @@ const sequelize = require('./config/db');
 const bodyParser = require('body-parser');
 const port = 3000;
 
-const sku = require('./models/sku');
+const Sku = require('./models/Sku');
+const Brand = require('./models/Brand')
 
 
 const skuRouter = require('./routes/sku/sku.index');
-
+const brandRouter = require('./models/Brand')
 const app = express();
 
 sequelize
 .authenticate()
 .then(()=>{
     console.log('connection has been sucessfully established')
-    sku.sync()
+    Sku.sync()
+    Brand.sync()
 })
 .catch(err=>{
     console.log('unable to connect',err)
